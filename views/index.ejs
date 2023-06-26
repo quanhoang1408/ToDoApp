@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY TODO LIST</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="header">
+        <h1 class="title text-center">MY TODO LIST</h1>
+    </div>
+    <div class="submit-form">
+        <h1>UPLOAD NEW NOTE</h1>
+        <form action="" method="post" id="note-form" enctype='multipart/form-data'>
+            <input type="file" class="input-file" name="files">
+            <div class="row">
+                <input class="col-4 input-name" name="usr_name" type="text" placeholder=" Name">
+                <input class="col-6 input-date" name="date_added" type="date" placeholder="Date">
+            </div>
+            <textarea form="note-form" class="submit-des" name="description" id="" cols="30" rows="10"></textarea>
+            <button class="submit-information" id="file-submit" type="submit" value="Submit" name="submit">SUBMIT</button>
+        </form>
+    </div>
+</body>
+</html>
