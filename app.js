@@ -1,13 +1,14 @@
 var express = require('express');
 let app = express();
-// Let app use ejs as the view engine
-app.set('view engine', 'ejs');
+// Let app use html as the view engine
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 // Let app use the public folder
 app.use (express.static(__dirname + '/public'));
-// Let app render the index.ejs file
-app.get("/", function(req,res){
-    res.render('index', {title: "ToDo App"});
-})
+//let app render index.html
+app.get('/', (req, res) => {
+    res.render('index.html');
+});
 const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => {
