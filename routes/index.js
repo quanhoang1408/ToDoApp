@@ -6,5 +6,4 @@ router.get("/", async(req,res)=>{
     res.render("index", {todo: allTodo})
 })
 
-
 module.exports = router;

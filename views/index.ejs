@@ -21,31 +21,29 @@
                             <li class="note-wrapper">
                                 <div class="row">
                                     <a href="/delete/todo/<%= todos._id %>" class="btn delete-btn ">Delete</a>
-                                    <a href="" class="btn edit-btn" onclick="editNote('<%=todos._id%>')">Edit</a>
+                                    <button class="btn edit-btn" onclick="edit('<%= todos._id %>')">Edit</button>
                                 </div>
-                                <p class="note-content">
+                                <p class="note-content" contenteditable>
                                     <%= todos.todo %>
                                 </p>
                                 <script>
-                                    function editNote(noteId) {
-                                        var newContent = prompt("Edit your note");
-                                        if (newContent != null) {
-                                            fetch(`/edit/todo/${noteId}`, {
-                                                    method: 'POST',
-                                                    headers: {
-                                                        'Content-Type': 'application/json'
-                                                    },
-                                                    body: JSON.stringify({content: newContent})
-                                                })
-                                                .then(res => res.json())
-                                                .then(data => {
-                                                    console.log(data);
-                                                })
-                                        }
+                                    function edit(id) {
+                                        let editBtn = document.querySelector('.edit-btn');
+                                        console.log('hello');
+                                        let deleteBtn = document.querySelector('.delete-btn');
+                                        deleteBtn.click();
+                                        const form = document.getElementById('note-form');
+                                        const todo = document.getElementById('todo');
+                                        let noteContent = document.querySelector('.note-content');
+                                        todo.value = noteContent.innerHTML;
+                                        fetch('/delete/todo/' + id, {
+                                            method: 'GET'
+                                        });
+                                        form.submit();
                                     }
+
                                 </script>
                             </li>
-
                             <% }) %>
                     </ul>
                 </div>
