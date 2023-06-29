@@ -1,0 +1,60 @@
+<% include("./partials/header") %>
+<div id="header">
+    <h1 class="title text-center">MY TODO LIST</h1>
+</div>
+
+<div class="container">
+    <form action="/add/todo" method="POST" class="d-flex">
+        <input type="text" name="todo" class="form-control" placeholder="Enter Todo">
+        <input type="submit" value="Add Todo" class="btn btn-md btn-primary mx-2">
+    </form>
+
+    <ul>
+        <% todo.forEach(todos => { %>
+            <li class="list-group-item"><%= todos.todo %> <a href="/delete/todo/<%= todos._id %>"
+                    class="btn btn-danger btn-sm">Delete</a></li>
+    
+            <% }) %>
+    </ul>
+
+</div>
+
+<div id="content">
+    <div class="row">
+        <h1 class="note-title">My Notes</h1>
+        <div class="view-notes col-6">
+            <ul class="note-list">
+                <li class="note-wrapper">
+                    <p class="date-created">DATE: 10/05/2023</p>
+                    <input type="checkbox" name="finish" class="delete">
+                    <p class="note-content">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Molestiae illum earum velit, ullam enim veniam qui totam
+                        deserunt corrupti, magni, quidem aspernatur consectetur sapiente
+                        tempora ratione mollitia asperiores. Est, ab. Lorem ipsum dolor
+                        sit amet consectetur adipisicing elit. Sint exercitationem
+                        dolores quos quod. Labore, deserunt est! Praesentium sequi ab,
+                        iure laudantium ullam ea suscipit necessitatibus veniam minus
+                        beatae accusantium culpa!
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <div class="submit-form col-4">
+            <h1 class="upload-title">UPLOAD NEW NOTE</h1>
+            <form action="" method="post" id="note-form" enctype="multipart/form-data">
+                <input type="file" class="input-file" name="files" />
+                <div class="row">
+                    <input class="col-4 input-name" name="usr_name" type="text" placeholder=" Name" />
+                    <input class="col-6 input-date" name="date_added" type="date" placeholder="Date" />
+                </div>
+                <textarea form="note-form" class="submit-des" name="description" id="" cols="30"
+                    rows="10"></textarea>
+                <button class="submit-information" id="file-submit" type="submit" value="Submit" name="submit">
+                    SUBMIT
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<% include("./partials/footer") %>
