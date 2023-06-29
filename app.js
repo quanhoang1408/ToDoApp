@@ -1,16 +1,33 @@
-var express = require('express');
-let app = express();
-// Let app use html as the view engine
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
-// Let app use the public folder
-app.use (express.static(__dirname + '/public'));
-//let app render index.html
-app.get('/', (req, res) => {
-    res.render('index.html');
-});
-const PORT = process.env.PORT || 5001;
+const express = require("express");
+const dotenv = require('dotenv');
+const morgan = require('morgan');
+const bodyparser = require('body-parser');
 
-app.listen(PORT, () => {
-    console.log(`server started on port ${PORT}`);
-  });
+const mongoose = require('mongoose');
+ 
+const app = express();
+
+dotenv.config({path:'config.env'})
+const PORT = process.env.PORT || 8080;
+
+mongoose.connect("mongodb://localhost/todo_express", {
+    useNewUrlParser : true,
+    useUnifiedTopology : true,
+});
+
+//log requests
+app.use(morgan('tiny'));
+
+// parse request to body-parser
+app.use(bodyparser.urlencoded({extended:true}));
+
+//middleware
+app.use(express.urlencoded({extended:true}))
+app.use(express.static("public"))
+app.set("view engine", "ejs");
+
+//routes
+app.use(require("./routes/index"))
+app.use(require("./routes/todo"))
+
+app.listen(PORT, ()=> console.log("listening on port", PORT));
