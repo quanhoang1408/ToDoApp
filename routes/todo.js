@@ -21,7 +21,17 @@ router.post("/add/todo", (req,res)=>{
         res.redirect("/");
       })
       .catch((err) => console.log(err));
+  })
+
+  .get("/edit/todo/:_id", (req, res) => {
+    console.log(req.body);
+    const _id = req.params._id;
+    const newNoteContent = req.body.content;
+    Todo.updateOne({ _id }, { $set: { todo: newNoteContent } })
+      .then(() => {
+        console.log("Updated Todo Successfully!");
+        res.redirect("/");
+      })
+      .catch((err) => console.log(err));
   });
-
-
 module.exports = router;
