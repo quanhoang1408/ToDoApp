@@ -22,7 +22,12 @@ router.post("/add/todo", (req,res)=>{
       })
       .catch((err) => console.log(err));
   })
-.get("/login", (req,res)=>{
-    res.render("login");
-});
+.get("/index_login", (req,res)=>{
+    res.render("index_login");
+})
+
+.get("/index_register", (req,res)=>{
+    res.render("index_register");
+})
+;
 module.exports = router;
