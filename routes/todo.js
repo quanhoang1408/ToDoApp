@@ -21,16 +21,8 @@ router.post("/add/todo", (req,res)=>{
         res.redirect("/");
       })
       .catch((err) => console.log(err));
-  });
-
-  // .post("/edit/todo/:_id", (req, res) => {
-  //   const { _id } = req.params;
-  //   const { todo } = req.body;
-  //   Todo.updateOne({ _id }, { todo })
-  //     .then(() => {
-  //       console.log("Updated Todo Successfully!");
-  //       res.redirect("/");
-  //     })
-  //     .catch((err) => console.log(err));
-  // });
+  })
+.get("/login", (req,res)=>{
+    res.render("login");
+});
 module.exports = router;

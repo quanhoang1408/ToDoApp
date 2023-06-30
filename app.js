@@ -28,10 +28,16 @@ app.use(bodyparser.urlencoded({extended:true}));
 //middleware
 app.use(express.urlencoded({extended:true}))
 app.use(express.static(__dirname + "/public"))
+//make app can view both ejs and html 
+app.engine("html", require("ejs").renderFile);
+
+//set view engine
 app.set("view engine", "ejs");
 
 //routes
 app.use(require("./routes/index"))
 app.use(require("./routes/todo"))
+
+//
 
 app.listen(PORT, ()=> console.log("listening on port", PORT));
