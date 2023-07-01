@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
-const initializePassport = require("./models/passport-config");
+const initializePassport = require("./models/Passport");
 const app = express();
 const methodOverride = require("method-override");
 
@@ -17,7 +17,6 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 app.use(methodOverride("_method"));
-
 
 const PORT = process.env.PORT || 5002;
 
@@ -69,14 +68,6 @@ app
         password: hashedPassword,
       });
 
-      // const user = new User({
-      //   id : Date.now().toString(),
-      //   name: req.body.name,
-      //   email: req.body.email,
-      //   password: hashedPassword,
-      // });
-      // user.save();
-      
       res.redirect("/index_login");
     } catch (e) {
       console.log(e);
