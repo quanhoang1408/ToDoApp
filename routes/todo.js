@@ -1,11 +1,15 @@
 const router = require("express").Router();
 const Todo = require("../models/Todo");
-
+const passport = require("passport");
 //routes
 router
   .post("/add/todo", (req, res) => {
     const { todo } = req.body;
-    const newTodo = new Todo({ todo });
+    const { user } = req.session.passport;
+    const newTodo = new Todo({
+      todo,
+      user,
+    });
     newTodo
       .save()
       .then(() => {
