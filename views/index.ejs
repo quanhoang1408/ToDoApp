@@ -12,11 +12,13 @@
 
 <body>
     <% include("./partials/header") %>
-    <a href="/login">LOGIN</a>
     <script>
         
     </script>
         <div id="content">
+            <form action="/logout?_method=DELETE" method="POST">
+                <button class="logout" type="submit">LOG OUT</button>
+            </form>
             <div class="row">
                 <div class="view-notes col-6">
                     <h1 class="note-title text-center">My Notes</h1>

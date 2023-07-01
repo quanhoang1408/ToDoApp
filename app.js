@@ -10,9 +10,15 @@ const session = require("express-session");
 const passport = require("passport");
 const initializePassport = require("./models/passport-config");
 const app = express();
+const methodOverride = require("method-override");
+
+dotenv.config();
+
 app.use(cors());
 app.use(express.json());
-dotenv.config();
+app.use(methodOverride("_method"));
+
+
 const PORT = process.env.PORT || 5002;
 
 mongoose.connect(process.env.MONGO_URL, {
@@ -39,12 +45,12 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session()); //persistent login sessions
-//make app can view ejs
-app.engine("html", require("ejs").renderFile);
 
 //set view engine
+app.engine("html", require("ejs").renderFile);
 app.set("view engine", "ejs");
-//LOGIN
+
+//Authentication
 const users = [];
 initializePassport(
   passport,
@@ -63,6 +69,14 @@ app
         password: hashedPassword,
       });
 
+      // const user = new User({
+      //   id : Date.now().toString(),
+      //   name: req.body.name,
+      //   email: req.body.email,
+      //   password: hashedPassword,
+      // });
+      // user.save();
+      
       res.redirect("/index_login");
     } catch (e) {
       console.log(e);
@@ -78,12 +92,18 @@ app
       failureRedirect: "/index_login",
       failureFlash: true,
     })
-  );
+  )
+  .delete("/logout", (req, res) => {
+    req.logOut(req.user, (err) => {
+      if (err) {
+        return next(err);
+      }
+    });
+    res.redirect("/index_login");
+  });
+
 //routes
 app.use(require("./routes/index"));
 app.use(require("./routes/todo"));
 
-//LOGIN
-
-//
 app.listen(PORT, () => console.log("listening on port", PORT));
