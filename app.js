@@ -18,6 +18,8 @@ mongoose.connect("mongodb://localhost/todo_express", {
 //log requests
 app.use(morgan('tiny'));
 
+const AuthRoute = require('./routes/auth')
+
 // parse request to body-parser
 app.use(bodyparser.urlencoded({extended:true}));
 
@@ -29,5 +31,6 @@ app.set("view engine", "ejs");
 //routes
 app.use(require("./routes/index"))
 app.use(require("./routes/todo"))
+app.use(require('./routes/auth'))
 
 app.listen(PORT, ()=> console.log("listening on port", PORT));
