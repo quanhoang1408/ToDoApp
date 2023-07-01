@@ -11,7 +11,7 @@ const passport = require("passport");
 const initializePassport = require("./models/Passport");
 const app = express();
 const methodOverride = require("method-override");
-
+const User = require("./models/User");
 dotenv.config();
 
 app.use(cors());
@@ -49,36 +49,38 @@ app.use(passport.session()); //persistent login sessions
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "ejs");
 
+//find user by email from collection User in database mongoDB
+
+
+
 //Authentication
-const users = [];
 initializePassport(
   passport,
-  (email) => users.find((user) => user.email === email),
-  (id) => users.find((user) => user.id === id)
+  // (email) => users.find((user) => user.email === email),
+  (email) =>  User.find({email : email}),
+  (_id) => User.find({id : _id})
 );
+
 
 app
   .post("/register", async (req, res) => {
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
-      users.push({
-        id: Date.now().toString(),
-        name: req.body.name,
-        email: req.body.email,
-        password: hashedPassword,
-      });
-
+      let user = new User({
+        name : req.body.name,
+        email : req.body.email,
+        password : hashedPassword,
+      })
+      user.save()
+      User.find();
       res.redirect("/index_login");
     } catch (e) {
       console.log(e);
       res.redirect("/index_register");
-    }
-    console.log(users);
-  })
-
+    }  })
   .post(
     "/login",
-    passport.authenticate("local", {
+    passport.authenticate("local", { //use local strategy
       successRedirect: "/",
       failureRedirect: "/index_login",
       failureFlash: true,

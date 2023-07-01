@@ -34,6 +34,13 @@
           <img src="/login/images/img-01.png" alt="IMG" />
         </div>
         <!-- LOGIN FORM -->
+        <!-- MESSAGE ALERT -->
+        <% if (messages.error) { %>
+          <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong>
+            <%= messages.error %>
+          </div>
+          <% } %>
         <form class="login100-form validate-form" action="/register" method="POST">
           <span class="login100-form-title"> Member Register </span>
           <!-- FULL NAME -->
