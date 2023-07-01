@@ -8,8 +8,6 @@ function initialize(passport, getUserByEmail, getUserById) {
   const authenticateUser = async (email, password, done) => {
     //const {user} = getUserByEmail(email);
     let user = await (getUserByEmail(email));
-    console.log(user);
-    console.log(user[0].email);
     if (user == null) {
       console.log("No user");
     } 
