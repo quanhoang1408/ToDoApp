@@ -2,67 +2,87 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TODO-LIST</title>
-    <!-- include boostrap cdn -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/todo.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <% include("./partials/header") %>
-        <script>
-
-        </script>
-        <div id="content">
-            <form action="/logout?_method=DELETE" method="POST">
-                <button class="logout" type="submit">LOG OUT</button>
+    <section class="vh-100 gradient-custom">
+            <p class="name "> Hello, <%=name %> </p>
+            <form action="/logout?_method=DELETE" method="POST" class="logout">
+                <button class="logout-btn" type="submit">LOG OUT</button>
             </form>
-            <div class="row">
-                <div class="view-notes col-6">
-                    <h1 class="note-title text-center">My Notes</h1>
-                    <ul class="note-list">
-                        <% todo.forEach(todos=> { %>
-                            <li class="note-wrapper">
-                                <div class="row">
-                                    <a href="/delete/todo/<%= todos._id %>" class="btn delete-btn ">Delete</a>
-                                    <button class="btn edit-btn" onclick="edit('<%= todos._id %>')">Edit</button>
-                                </div>
-                                <p class="note-content" contenteditable>
-                                    <%= todos.todo %>
-                                </p>
-                                <script>
-                                    function edit(id) {
-                                        let editBtn = document.querySelector('.edit-btn');
-                                        console.log('hello');
-                                        let deleteBtn = document.querySelector('.delete-btn');
-                                        deleteBtn.click();
-                                        const form = document.getElementById('note-form');
-                                        const todo = document.getElementById('todo');
-                                        let noteContent = document.querySelector('.note-content');
-                                        todo.value = noteContent.innerHTML;
-                                        fetch('/delete/todo/' + id, {
-                                            method: 'GET'
-                                        });
-                                        form.submit();
-                                    }
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-xl-10">
+                    <div class="card">
+                        <form class="d-flex justify-content-center align-items-center mb-4 sticky-top p-5 todo-form"
+                            id="todo-form" action="add/todo" method="POST">
+                            <div class="form-outline flex-fill">
+                                <input type="text" id="todo" name="todo" class="form-control"
+                                    placeholder="New task..." />
+                            </div>
+                            <button type="submit" class="btn btn-info ms-2">Add</button>
+                        </form>
 
-                                </script>
-                            </li>
-                            <% }) %>
-                    </ul>
-                </div>
-                <div class="submit-form col-4">
-                    <h1 class="upload-title">UPLOAD NEW NOTE</h1>
-                    <form action="/add/todo" method="POST" class="d-flex" id="note-form">
-                        <input type="text" id="todo" name="todo" class="form-control" placeholder="Enter Todo">
-                        <input type="submit" value="Add Todo" class="btn btn-md btn-primary mx-2 submit-btn">
-                    </form>
+                        <div class="card-body p-5">
+
+                            <!-- Tabs navs -->
+                
+                            <!-- Tabs content -->
+                            <div class="tab-content" id="ex1-content">
+                                <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel"
+                                    aria-labelledby="ex1-tab-1">
+                                    <ul class="list-group mb-0 todo-list">
+                                        <% todo.forEach(todos=> { %>
+                                            <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
+                                                style="background-color: #dfe3e6">
+                                                <div class="row todo" style="width: 100% !important;">
+                                                    <p class="todo-content col-7" id="<%= todos._id %>" contenteditable="">
+                                                        <%= todos.todo %>
+                                                    </p>
+                                                    <div class="button col-5">
+                                                        <a href="/delete/todo/<%= todos._id %>"
+                                                            class="btn delete-btn">Delete</a>
+                                                        <button class="btn edit-btn"
+                                                            onclick="edit('<%= todos._id %>')">Edit</button>
+                                                        <script>
+                                                            function edit(id) {
+                                                                let editBtn = document.querySelector('.edit-btn');
+                                                                console.log('hello');
+                                                                let deleteBtn = document.querySelector('.delete-btn');
+                                                                deleteBtn.click();
+                                                                const form = document.getElementById('todo-form');
+                                                                const todo = document.getElementById('todo');
+                                                                let noteContent = document.getElementById(id);
+                                                                todo.value = noteContent.innerHTML;
+                                                                fetch('/delete/todo/' + id, {
+                                                                    method: 'GET'
+                                                                });
+                                                                form.submit();
+                                                            }
+
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <% }) %>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Tabs content -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <% include("./partials/footer") %>
+    </section>
 </body>
 
 </html>
