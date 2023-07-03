@@ -4,20 +4,21 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>TodoApp</title>
     <link rel="stylesheet" href="/css/todo.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <section class="vh-100 gradient-custom">
-            <p class="name "> Hello, <%=name %> </p>
-            <form action="/logout?_method=DELETE" method="POST" class="logout">
-                <button class="logout-btn" type="submit">LOG OUT</button>
-            </form>
+        <p class="name "> Hello, <%=name %>
+        </p>
+        <form action="/logout?_method=DELETE" method="POST" class="logout">
+            <button class="logout-btn" type="submit">LOG OUT</button>
+        </form>
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-xl-10">
@@ -32,9 +33,6 @@
                         </form>
 
                         <div class="card-body p-5">
-
-                            <!-- Tabs navs -->
-                
                             <!-- Tabs content -->
                             <div class="tab-content" id="ex1-content">
                                 <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel"
@@ -44,7 +42,8 @@
                                             <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
                                                 style="background-color: #dfe3e6">
                                                 <div class="row todo" style="width: 100% !important;">
-                                                    <p class="todo-content col-7" id="<%= todos._id %>" contenteditable="">
+                                                    <p class="todo-content col-7" id="<%= todos._id %>"
+                                                        contenteditable="">
                                                         <%= todos.todo %>
                                                     </p>
                                                     <div class="button col-5">
@@ -67,7 +66,6 @@
                                                                 });
                                                                 form.submit();
                                                             }
-
                                                         </script>
                                                     </div>
                                                 </div>
@@ -76,7 +74,6 @@
                                     </ul>
                                 </div>
                             </div>
-                            <!-- Tabs content -->
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Login V1</title>
+  <title>TodoApp-Register</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -34,42 +34,43 @@
           <img src="/login/images/img-01.png" alt="IMG" />
         </div>
         <!-- LOGIN FORM -->
-        <!-- MESSAGE ALERT -->
-        <% if (messages.error) { %>
-          <div class="alert alert-danger" role="alert">
-            <strong>Oh snap!</strong>
-            <%= messages.error %>
-          </div>
-          <% } %>
         <form class="login100-form validate-form" action="/register" method="POST">
           <span class="login100-form-title"> Member Register </span>
-          <!-- FULL NAME -->
-          <div class="wrap-input100 validate-input" data-validate="Full Name is required">
-            <input class="input100" type="text" name="name" placeholder="Full Name" />
-            <span class="focus-input100"></span>
-            <span class="symbol-input100">
-              <i class="fa fa-user" aria-hidden="true"></i>
-            </span>
-          </div>
-          <!-- EMAIL -->
-          <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-            <input class="input100" type="text" name="email" placeholder="Email" />
-            <span class="focus-input100"></span>
-            <span class="symbol-input100">
-              <i class="fa fa-envelope" aria-hidden="true"></i>
-            </span>
-          </div>
-          <!-- PASSWORD -->
-          <div class="wrap-input100 validate-input" data-validate="Password is required">
-            <input class="input100" type="password" name="password" placeholder="Password" />
-            <span class="focus-input100"></span>
-            <span class="symbol-input100">
-              <i class="fa fa-lock" aria-hidden="true"></i>
-            </span>
-          </div>
-          <div class="container-login100-form-btn">
-            <button type="submit" class="login100-form-btn">Sign up</button>
-          </div>
+          <!-- ERROR MESSAGE -->
+          <% if (message !=null) { %>
+            <div class="alert alert-danger" role="alert">
+              <strong>Oh snap!</strong>
+              <%= message %>
+                <% console.log(message) %>
+            </div>
+            <% } %>
+              <!-- FULL NAME -->
+              <div class="wrap-input100 validate-input" data-validate="Full Name is required">
+                <input class="input100" type="text" name="name" placeholder="Full Name" />
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </span>
+              </div>
+              <!-- EMAIL -->
+              <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                <input class="input100" type="text" name="email" placeholder="Email" />
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                </span>
+              </div>
+              <!-- PASSWORD -->
+              <div class="wrap-input100 validate-input" data-validate="Password is required">
+                <input class="input100" type="password" name="password" placeholder="Password" />
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="fa fa-lock" aria-hidden="true"></i>
+                </span>
+              </div>
+              <div class="container-login100-form-btn">
+                <button type="submit" class="login100-form-btn">Sign up</button>
+              </div>
         </form>
         <!-- END FORM -->
       </div>

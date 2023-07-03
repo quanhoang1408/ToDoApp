@@ -49,55 +49,8 @@ app.use(passport.session()); //persistent login sessions
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "ejs");
 
-//find user by email from collection User in database mongoDB
-
-
-
-//Authentication
-// initializePassport(
-//   passport,
-//   // (email) => users.find((user) => user.email === email),
-//   (email) =>  User.find({email : email}),
-//   (_id) => User.find({id : _id})
-// );
-
-
-// app
-//   .post("/register", async (req, res) => {
-//     try {
-//       const hashedPassword = await bcrypt.hash(req.body.password, 10);
-//       let user = new User({
-//         name : req.body.name,
-//         email : req.body.email,
-//         password : hashedPassword,
-//       })
-//       user.save()
-//       User.find();
-//       res.redirect("/index_login");
-//     } catch (e) {
-//       console.log(e);
-//       res.redirect("/index_register");
-//     }  })
-//   .post(
-//     "/login",
-//     passport.authenticate("local", { //use local strategy
-//       successRedirect: "/",
-//       failureRedirect: "/index_login",
-//       failureFlash: true,
-//     })
-//   )
-//   .delete("/logout", (req, res) => {
-//     req.logOut(req.user, (err) => {
-//       if (err) {
-//         return next(err);
-//       }
-//     });
-//     res.redirect("/index_login");
-//   });
-
 //routes
-app.use(require("./routes/login"));
 app.use(require("./routes/index"));
 app.use(require("./routes/todo"));
-
+app.use(require("./routes/login"));
 app.listen(PORT, () => console.log("listening on port", PORT));
