@@ -34,15 +34,16 @@
           <img src="/login/images/img-01.png" alt="IMG" />
         </div>
         <!-- LOGIN FORM -->
-        <!-- MESSAGE ALERT -->
-        <% if (messages.error) { %>
-          <div class="alert alert-danger" role="alert">
-            <strong>Oh snap!</strong>
-            <%= messages.error %>
-          </div>
-          <% } %>
         <form class="login100-form validate-form" action="/register" method="POST">
           <span class="login100-form-title"> Member Register </span>
+          <!-- ERROR MESSAGE -->
+          <% if (message != null) { %>
+            <div class="alert alert-danger" role="alert">
+              <strong>Oh snap!</strong>
+              <%= message %>
+              <% console.log(message) %>
+            </div>
+            <% } %>
           <!-- FULL NAME -->
           <div class="wrap-input100 validate-input" data-validate="Full Name is required">
             <input class="input100" type="text" name="name" placeholder="Full Name" />

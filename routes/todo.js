@@ -34,7 +34,10 @@ router
   })
 
   .get("/index_register", checkNotAuthenticated, (req, res) => {
-    res.render("index_register");
+    const error = req.query.error;
+    res.render("index_register",{
+      message: error
+    });
   });
 
 function checkNotAuthenticated(req, res, next) {
