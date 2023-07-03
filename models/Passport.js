@@ -1,19 +1,16 @@
 const LocalStrategy = require("passport-local").Strategy;
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const { get } = require("mongoose");
 const User = require("./User");
 
 function initialize(passport, getUserByEmail, getUserById) {
-  
   const authenticateUser = async (email, password, done) => {
     //const {user} = getUserByEmail(email);
-    let user = await (getUserByEmail(email));
+    let user = await getUserByEmail(email);
     if (user == null || user.length == 0) {
       return done(null, false, { message: "No user with that email" });
     }
     try {
-      console.log ('user', password);
-      console.log('hash', user[0].password);
       if (await bcrypt.compare(password, user[0].password)) {
         return done(null, user);
       } else {

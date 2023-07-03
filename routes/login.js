@@ -6,21 +6,19 @@ const User = require("../models/User");
 
 initializePassport(
   passport,
-  // (email) => users.find((user) => user.email === email),
   (email) => User.find({ email: email }),
   (_id) => User.find({ id: _id })
 );
-//pass flash message to ejs
 
 //routes
 router
-  . post("/register", async (req, res) => {
+  .post("/register", async (req, res) => {
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       let user = await User.find({ email: req.body.email });
-      console.log(user);
-      if (user != null || user != undefined) {
-        res.redirect('/index_register?error=Email%20already%20exists');
+
+      if (user.length > 0) {
+        res.redirect("/index_register?error=Email%20already%20exists");
       } else {
         user = new User({
           name: req.body.name,
